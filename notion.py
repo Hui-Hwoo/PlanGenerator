@@ -109,10 +109,11 @@ class Notion:
         if response.status_code != 200:
             raise ValueError("calendar_id is wrong")
         data = response.json()
-
+ 
         # filter the data
         filtered_data = {}
         for page in data["results"]:
+
             date = page["properties"]["Date"]["date"]["start"]
             page_id = page["id"]
             filtered_data[date] = page_id
@@ -215,22 +216,22 @@ class Notion:
             },
             "parent": {
                 "type": "database_id",
-                "database_id": "10c55107-2e56-4b45-80b5-cc697c73ce2f"
+                "database_id": "81fe14d87587416199fddacf7ea733f4"
             },
             "properties": {
                 "Date": {
-                    "id": "dq%3DM",
+                    "id": "phwD",
                     "type": "date",
                     "date": {
                         "start": date,
                     }
                 },
                 "Tags": {
-                    "id": "~qWm",
+                    "id": "kGcQ",
                     "type": "multi_select",
                     "multi_select": [
                         {
-                            "id": "249d49eb-9afe-4bf7-8134-af91595a1e8a",
+                            "id": "00959bd0-54ba-4cf6-95ee-826fba63d92f",
                             "name": "LeetCode",
                             "color": "blue"
                         }
@@ -270,6 +271,7 @@ class Notion:
             raise ValueError("block_id is wrong")
 
         blocks = response.json()["results"]
+
         if job == "find_id":
             for block in blocks:
                 if block["type"] == "quote":
@@ -307,10 +309,10 @@ class Notion:
 def main():
     # creat a notion object according the provided base information
     base_info = {
-        "token": 'secret_OiAX1w2anZHHXDhzkozBIJd5PWLJMaoy04ZsM1vix48',
-        "database_id": '46aadc437ddd4017a2c4508801091956',
-        "calendar_id": '10c551072e564b4580b5cc697c73ce2f',
-        "review_cycle": [2, 7, 14]
+        "token": 'secret_zdDJhDv6lYaU8BQau8w0fNVHX3EZkpacYPzkazlz7AL',
+        "database_id": '1bd18ec17cf84683bc2eb71c4fb233d7',
+        "calendar_id": '81fe14d87587416199fddacf7ea733f4',
+        "review_cycle": [2, 7, 14, 30]
     }
     notion = Notion(**base_info)
 
@@ -331,6 +333,7 @@ def main():
         notion.updateBlock(block_id)
     # update the properties of each page
     notion.updatePage()
+    print("\nFinished")
 
 
 if __name__ == '__main__':
